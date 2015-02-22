@@ -12,7 +12,8 @@
 
 -(void)drawRect:(CGRect)rect
 {
-    [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:-138 hidden:YES];
+    CGFloat drawingAngle = [self drawingAngleFromUserAngle:90];
+    [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:drawingAngle hidden:YES];
 }
 
 - (void)drawCanvas1WithAngle: (CGFloat)angle frameWidth: (CGFloat)frameWidth angle5: (CGFloat)angle5 progressAngle: (CGFloat)progressAngle hidden: (BOOL)hidden
@@ -39,7 +40,7 @@
     CGPoint point2 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 30) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 30) * M_PI/180));
     CGSize itemSize = CGSizeMake(frameWidth / 10.0, frameWidth / 10.0);
     CGFloat fontSize = itemSize.width / 1.20;
-    CGPoint anchor1 = CGPointMake(point1.x + 0.1 * itemSize.width, point1.y - itemSize.width);
+    CGPoint anchor1 = CGPointMake(point1.x + 0.16 * itemSize.width, point1.y - itemSize.width);
     CGFloat pauseFontSize = itemSize.width / 1.70;
     CGPoint point3 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 60) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 60) * M_PI/180));
     CGPoint point5 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 90) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 90) * M_PI/180));
@@ -366,4 +367,17 @@
     }
 }
 
+
+- (CGFloat)drawingAngleFromUserAngle:(CGFloat)angle
+{
+    CGFloat drawingAngle ;
+    if(angle > 90)
+    {
+        drawingAngle = angle - 270;
+    }else
+    {
+        drawingAngle = 90 - angle;
+    }
+    return drawingAngle;
+}
 @end
