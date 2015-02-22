@@ -40,6 +40,7 @@
     CGSize itemSize = CGSizeMake(frameWidth / 10.0, frameWidth / 10.0);
     CGFloat fontSize = itemSize.width / 1.20;
     CGPoint anchor1 = CGPointMake(point1.x + 0.1 * itemSize.width, point1.y - itemSize.width);
+    CGFloat pauseFontSize = itemSize.width / 1.70;
     CGPoint point3 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 60) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 60) * M_PI/180));
     CGPoint point5 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 90) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 90) * M_PI/180));
     CGPoint anchor2 = CGPointMake(point5.x + 1.05 * itemSize.width, itemSize.width / 3.0 + point5.y);
@@ -55,6 +56,8 @@
     CGSize outerCircleSize4 = CGSizeMake(frameWidth * 0.84, frameWidth * 0.84);
     CGSize verticalAnchorSize = CGSizeMake(frameWidth / 33.0, frameWidth / 11.0);
     CGSize horizontalAnchorSize = CGSizeMake(frameWidth / 11.0, frameWidth / 33.0);
+    CGPoint pausePositionPoint = CGPointMake(frameWidth * 0.4, frameWidth * 0.4);
+    CGSize pauseButtonSize = CGSizeMake(frameWidth * 0.2, frameWidth * 0.2);
     CGPoint point6 = CGPointMake(frameWidth * 0.45 + radius * cos(angle5 * M_PI/180), frameWidth * 0.45 + radius * sin(angle5 * M_PI/180));
     CGPoint point7 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 30) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 30) * M_PI/180));
     CGPoint point8 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 60) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 60) * M_PI/180));
@@ -341,6 +344,23 @@
     UIBezierPath* rectangle5Path = [UIBezierPath bezierPathWithRect: CGRectMake(anchor2.x, anchor2.y, horizontalAnchorSize.width, horizontalAnchorSize.height)];
     [UIColor.whiteColor setFill];
     [rectangle5Path fill];
+    
+    
+    //// Text 13 Drawing
+    CGRect text13Rect = CGRectMake(pausePositionPoint.x, pausePositionPoint.y, pauseButtonSize.width, pauseButtonSize.height);
+    {
+        NSString* textContent = @"PAUSE";
+        NSMutableParagraphStyle* text13Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+        text13Style.alignment = NSTextAlignmentLeft;
+        
+        NSDictionary* text13FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: pauseFontSize], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: text13Style};
+        
+        CGFloat text13TextHeight = [textContent boundingRectWithSize: CGSizeMake(text13Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text13FontAttributes context: nil].size.height;
+        CGContextSaveGState(context);
+        CGContextClipToRect(context, text13Rect);
+        [textContent drawInRect: CGRectMake(CGRectGetMinX(text13Rect), CGRectGetMinY(text13Rect) + (CGRectGetHeight(text13Rect) - text13TextHeight) / 2, CGRectGetWidth(text13Rect), text13TextHeight) withAttributes: text13FontAttributes];
+        CGContextRestoreGState(context);
+    }
 }
 
 @end
