@@ -14,7 +14,7 @@
 		A11E9D941A9A691600D493EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A11E9D931A9A691600D493EC /* Images.xcassets */; };
 		A11E9D971A9A691600D493EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E9D951A9A691600D493EC /* LaunchScreen.xib */; };
 		A11E9DA31A9A691600D493EC /* NewControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E9DA21A9A691600D493EC /* NewControlTests.m */; };
-		A11E9DAE1A9A692200D493EC /* RGView.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E9DAD1A9A692200D493EC /* RGView.m */; };
+		A11E9DAE1A9A692200D493EC /* RGTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E9DAD1A9A692200D493EC /* RGTimerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,8 +41,8 @@
 		A11E9D9C1A9A691600D493EC /* NewControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11E9DA11A9A691600D493EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11E9DA21A9A691600D493EC /* NewControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewControlTests.m; sourceTree = "<group>"; };
-		A11E9DAC1A9A692200D493EC /* RGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGView.h; sourceTree = "<group>"; };
-		A11E9DAD1A9A692200D493EC /* RGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGView.m; sourceTree = "<group>"; };
+		A11E9DAC1A9A692200D493EC /* RGTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTimerView.h; sourceTree = "<group>"; };
+		A11E9DAD1A9A692200D493EC /* RGTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTimerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +66,8 @@
 		A11E9D7A1A9A691600D493EC = {
 			isa = PBXGroup;
 			children = (
-				A11E9DAC1A9A692200D493EC /* RGView.h */,
-				A11E9DAD1A9A692200D493EC /* RGView.m */,
+				A11E9DAC1A9A692200D493EC /* RGTimerView.h */,
+				A11E9DAD1A9A692200D493EC /* RGTimerView.m */,
 				A11E9D851A9A691600D493EC /* NewControl */,
 				A11E9D9F1A9A691600D493EC /* NewControlTests */,
 				A11E9D841A9A691600D493EC /* Products */,
@@ -227,7 +227,7 @@
 				A11E9D8F1A9A691600D493EC /* ViewController.m in Sources */,
 				A11E9D8C1A9A691600D493EC /* AppDelegate.m in Sources */,
 				A11E9D891A9A691600D493EC /* main.m in Sources */,
-				A11E9DAE1A9A692200D493EC /* RGView.m in Sources */,
+				A11E9DAE1A9A692200D493EC /* RGTimerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

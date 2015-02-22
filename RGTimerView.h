@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol RGTimerViewDelegateProtcol <NSObject>
+- (void)pauseValue:(BOOL)value;
+@end
 
-@interface RGView : UIView
+
+@interface RGTimerView : UIView
 @property (nonatomic) CGFloat inputAngle;
 @property (nonatomic) BOOL pauseNow;
+@property id<RGTimerViewDelegateProtcol> delegate;
 @end
+

@@ -7,10 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "RGView.h"
+#import "RGTimerView.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet RGView *timerView;
+@property (weak, nonatomic) IBOutlet RGTimerView *timerView;
 
 @end
 

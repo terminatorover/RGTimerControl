@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 ROBERA GELETA. All rights reserved.
 //
 
-#import "RGView.h"
+#import "RGTimerView.h"
 
-@implementation RGView
+@implementation RGTimerView
 {
     CGRect _pauseCircleFrame;
 }
@@ -430,7 +430,12 @@
     if(CGRectContainsPoint(_pauseCircleFrame,tapPoint))
     {
         _pauseNow = !_pauseNow;
+        if(_delegate && [_delegate respondsToSelector:@selector(pauseValue:)])
+        {
+            [_delegate pauseValue:_pauseNow];
+        }
     }
     [self setNeedsDisplay];
+
 }
 @end
