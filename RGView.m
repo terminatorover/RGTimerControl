@@ -22,7 +22,13 @@
     
     //// Color Declarations
     UIColor* color = [UIColor colorWithRed: 0.341 green: 0.757 blue: 0.384 alpha: 1];
-    UIColor* color2 = [UIColor colorWithRed: 0.122 green: 0.725 blue: 0.973 alpha: 1];
+    UIColor* color2 = [UIColor colorWithRed: 0.275 green: 0.337 blue: 0.463 alpha: 1];
+    UIColor* color3 = [UIColor colorWithRed: 0.227 green: 0.282 blue: 0.4 alpha: 1];
+    
+    //// Shadow Declarations
+    UIColor* shadow = [UIColor.blackColor colorWithAlphaComponent: 0.47];
+    CGSize shadowOffset = CGSizeMake(1.1, 1.1);
+    CGFloat shadowBlurRadius = 5;
     
     //// Variable Declarations
     CGFloat radius = frameWidth * 0.3;
@@ -33,7 +39,9 @@
     CGPoint point3 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 60) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 60) * M_PI/180));
     CGPoint point5 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 90) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 90) * M_PI/180));
     CGSize innerCircle = CGSizeMake(frameWidth * 0.3, frameWidth * 0.3);
-    CGPoint innerCirclePosition = CGPointMake(frameWidth * 0.35, frameWidth * 0.35);
+    CGPoint innerCirclePosition1 = CGPointMake(frameWidth * 0.35, frameWidth * 0.35);
+    CGSize outerCircleSize1 = CGSizeMake(frameWidth * 0.75, frameWidth * 0.75);
+    CGPoint innerCirclePosition2 = CGPointMake(frameWidth * 0.12, frameWidth * 0.12);
     CGPoint point6 = CGPointMake(frameWidth * 0.45 + radius * cos(angle5 * M_PI/180), frameWidth * 0.45 + radius * sin(angle5 * M_PI/180));
     CGPoint point7 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 30) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 30) * M_PI/180));
     CGPoint point8 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 60) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 60) * M_PI/180));
@@ -53,6 +61,12 @@
     [rectanglePath fill];
     
     
+    //// Oval 2 Drawing
+    UIBezierPath* oval2Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(innerCirclePosition2.x, innerCirclePosition2.y, outerCircleSize1.width, outerCircleSize1.height)];
+    [color3 setFill];
+    [oval2Path fill];
+    
+    
     //// Text Drawing
     CGRect textRect = CGRectMake(point1.x, point1.y, itemSize.width, itemSize.height);
     {
@@ -60,7 +74,7 @@
         NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         textStyle.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: textStyle};
+        NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: textStyle};
         
         CGFloat textTextHeight = [textContent boundingRectWithSize: CGSizeMake(textRect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: textFontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -77,7 +91,7 @@
         NSMutableParagraphStyle* text2Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text2Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text2FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text2Style};
+        NSDictionary* text2FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.lightGrayColor, NSParagraphStyleAttributeName: text2Style};
         
         CGFloat text2TextHeight = [textContent boundingRectWithSize: CGSizeMake(text2Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text2FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -94,7 +108,7 @@
         NSMutableParagraphStyle* text3Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text3Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text3FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text3Style};
+        NSDictionary* text3FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.lightGrayColor, NSParagraphStyleAttributeName: text3Style};
         
         CGFloat text3TextHeight = [textContent boundingRectWithSize: CGSizeMake(text3Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text3FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -111,7 +125,7 @@
         NSMutableParagraphStyle* text4Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text4Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text4FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text4Style};
+        NSDictionary* text4FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: text4Style};
         
         CGFloat text4TextHeight = [textContent boundingRectWithSize: CGSizeMake(text4Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text4FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -128,7 +142,7 @@
         NSMutableParagraphStyle* text5Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text5Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text5FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text5Style};
+        NSDictionary* text5FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.lightGrayColor, NSParagraphStyleAttributeName: text5Style};
         
         CGFloat text5TextHeight = [textContent boundingRectWithSize: CGSizeMake(text5Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text5FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -145,7 +159,7 @@
         NSMutableParagraphStyle* text6Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text6Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text6FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text6Style};
+        NSDictionary* text6FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.lightGrayColor, NSParagraphStyleAttributeName: text6Style};
         
         CGFloat text6TextHeight = [textContent boundingRectWithSize: CGSizeMake(text6Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text6FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -162,7 +176,7 @@
         NSMutableParagraphStyle* text7Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text7Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text7FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text7Style};
+        NSDictionary* text7FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: text7Style};
         
         CGFloat text7TextHeight = [textContent boundingRectWithSize: CGSizeMake(text7Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text7FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -179,7 +193,7 @@
         NSMutableParagraphStyle* text8Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text8Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text8FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text8Style};
+        NSDictionary* text8FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.lightGrayColor, NSParagraphStyleAttributeName: text8Style};
         
         CGFloat text8TextHeight = [textContent boundingRectWithSize: CGSizeMake(text8Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text8FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -196,7 +210,7 @@
         NSMutableParagraphStyle* text9Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text9Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text9FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text9Style};
+        NSDictionary* text9FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.lightGrayColor, NSParagraphStyleAttributeName: text9Style};
         
         CGFloat text9TextHeight = [textContent boundingRectWithSize: CGSizeMake(text9Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text9FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -213,7 +227,7 @@
         NSMutableParagraphStyle* text10Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text10Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text10FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text10Style};
+        NSDictionary* text10FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: text10Style};
         
         CGFloat text10TextHeight = [textContent boundingRectWithSize: CGSizeMake(text10Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text10FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -230,7 +244,7 @@
         NSMutableParagraphStyle* text11Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text11Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text11FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text11Style};
+        NSDictionary* text11FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.lightGrayColor, NSParagraphStyleAttributeName: text11Style};
         
         CGFloat text11TextHeight = [textContent boundingRectWithSize: CGSizeMake(text11Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text11FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -247,7 +261,7 @@
         NSMutableParagraphStyle* text12Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         text12Style.alignment = NSTextAlignmentLeft;
         
-        NSDictionary* text12FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.blackColor, NSParagraphStyleAttributeName: text12Style};
+        NSDictionary* text12FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: fontSize], NSForegroundColorAttributeName: UIColor.lightGrayColor, NSParagraphStyleAttributeName: text12Style};
         
         CGFloat text12TextHeight = [textContent boundingRectWithSize: CGSizeMake(text12Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text12FontAttributes context: nil].size.height;
         CGContextSaveGState(context);
@@ -258,9 +272,12 @@
     
     
     //// Oval Drawing
-    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(innerCirclePosition.x, innerCirclePosition.y, innerCircle.width, innerCircle.height)];
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(innerCirclePosition1.x, innerCirclePosition1.y, innerCircle.width, innerCircle.height)];
+    CGContextSaveGState(context);
+    CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, [shadow CGColor]);
     [color setFill];
     [ovalPath fill];
+    CGContextRestoreGState(context);
 }
 
 
