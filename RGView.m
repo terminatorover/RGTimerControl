@@ -39,7 +39,7 @@
     CGPoint point2 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 30) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 30) * M_PI/180));
     CGSize itemSize = CGSizeMake(frameWidth / 10.0, frameWidth / 10.0);
     CGFloat fontSize = itemSize.width / 1.20;
-    CGPoint anchor1 = CGPointMake(point1.x, point1.y - itemSize.width);
+    CGPoint anchor1 = CGPointMake(point1.x + 0.1 * itemSize.width, point1.y - itemSize.width);
     CGPoint point3 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 60) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 60) * M_PI/180));
     CGPoint point5 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 90) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 90) * M_PI/180));
     CGPoint anchor2 = CGPointMake(point5.x + 1.05 * itemSize.width, itemSize.width / 3.0 + point5.y);
