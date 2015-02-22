@@ -22,6 +22,7 @@
     
     //// Color Declarations
     UIColor* color = [UIColor colorWithRed: 0.341 green: 0.757 blue: 0.384 alpha: 1];
+    UIColor* color2 = [UIColor colorWithRed: 0.122 green: 0.725 blue: 0.973 alpha: 1];
     
     //// Variable Declarations
     CGFloat radius = frameWidth * 0.3;
@@ -32,7 +33,7 @@
     CGPoint point3 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 60) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 60) * M_PI/180));
     CGPoint point5 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 90) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 90) * M_PI/180));
     CGSize innerCircle = CGSizeMake(frameWidth * 0.3, frameWidth * 0.3);
-    CGPoint innerCirclePosition = CGPointMake(frameWidth * 0.5, frameWidth * 0.5);
+    CGPoint innerCirclePosition = CGPointMake(frameWidth * 0.35, frameWidth * 0.35);
     CGPoint point6 = CGPointMake(frameWidth * 0.45 + radius * cos(angle5 * M_PI/180), frameWidth * 0.45 + radius * sin(angle5 * M_PI/180));
     CGPoint point7 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 30) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 30) * M_PI/180));
     CGPoint point8 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 60) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 60) * M_PI/180));
@@ -41,6 +42,16 @@
     CGPoint point11 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 150) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 150) * M_PI/180));
     CGPoint point12 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 180) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 180) * M_PI/180));
     CGPoint expression = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 210) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 210) * M_PI/180));
+    
+    //// Frames
+    CGRect frame = CGRectMake(0, 0, frameWidth, 100);
+    
+    
+    //// Rectangle Drawing
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(0, 0, frameWidth, frameWidth)];
+    [color2 setFill];
+    [rectanglePath fill];
+    
     
     //// Text Drawing
     CGRect textRect = CGRectMake(point1.x, point1.y, itemSize.width, itemSize.height);
@@ -247,9 +258,10 @@
     
     
     //// Oval Drawing
-    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake((innerCirclePosition.x - 16), (innerCirclePosition.y - 16), innerCircle.width, innerCircle.height)];
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(innerCirclePosition.x, innerCirclePosition.y, innerCircle.width, innerCircle.height)];
     [color setFill];
     [ovalPath fill];
 }
+
 
 @end
