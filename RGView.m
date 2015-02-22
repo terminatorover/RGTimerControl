@@ -12,8 +12,8 @@
 
 -(void)drawRect:(CGRect)rect
 {
-    CGFloat drawingAngle = [self drawingAngleFromUserAngle:90];
-    [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:drawingAngle hidden:YES];
+    CGFloat drawingAngle = [self drawingAngleFromUserAngle:_inputAngle];
+    [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:drawingAngle hidden:_pauseNow];
 }
 
 - (void)drawCanvas1WithAngle: (CGFloat)angle frameWidth: (CGFloat)frameWidth angle5: (CGFloat)angle5 progressAngle: (CGFloat)progressAngle hidden: (BOOL)hidden
@@ -371,13 +371,29 @@
 - (CGFloat)drawingAngleFromUserAngle:(CGFloat)angle
 {
     CGFloat drawingAngle ;
-    if(angle > 90)
+    if(angle >= 180)
     {
-        drawingAngle = angle - 270;
-    }else
+        drawingAngle = -90 - abs((angle -180)); // angle - 360;
+    }else if (angle > 90)
+    {
+        drawingAngle =  -1 * (-90 + angle);
+    }
+    else
     {
         drawingAngle = 90 - angle;
     }
     return drawingAngle;
+}
+
+-(void)setInputAngle:(CGFloat)inputAngle
+{
+    _inputAngle = inputAngle;
+    [self setNeedsDisplay];
+}
+
+- (void)setPauseNow:(BOOL)pauseNow
+{
+    _pauseNow = pauseNow;
+    [self setNeedsDisplay];
 }
 @end

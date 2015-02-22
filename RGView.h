@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RGView : UIView
-
+@property (nonatomic) CGFloat inputAngle;
+@property (nonatomic) BOOL pauseNow;
 @end
