@@ -12,10 +12,10 @@
 
 -(void)drawRect:(CGRect)rect
 {
-    [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:-138];
+    [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:-138 hidden:YES];
 }
 
-- (void)drawCanvas1WithAngle: (CGFloat)angle frameWidth: (CGFloat)frameWidth angle5: (CGFloat)angle5 progressAngle: (CGFloat)progressAngle
+- (void)drawCanvas1WithAngle: (CGFloat)angle frameWidth: (CGFloat)frameWidth angle5: (CGFloat)angle5 progressAngle: (CGFloat)progressAngle hidden: (BOOL)hidden
 {
     //// General Declarations
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -346,20 +346,23 @@
     [rectangle5Path fill];
     
     
-    //// Text 13 Drawing
-    CGRect text13Rect = CGRectMake(pausePositionPoint.x, pausePositionPoint.y, pauseButtonSize.width, pauseButtonSize.height);
+    if (!hidden)
     {
-        NSString* textContent = @"PAUSE";
-        NSMutableParagraphStyle* text13Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
-        text13Style.alignment = NSTextAlignmentLeft;
-        
-        NSDictionary* text13FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: pauseFontSize], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: text13Style};
-        
-        CGFloat text13TextHeight = [textContent boundingRectWithSize: CGSizeMake(text13Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text13FontAttributes context: nil].size.height;
-        CGContextSaveGState(context);
-        CGContextClipToRect(context, text13Rect);
-        [textContent drawInRect: CGRectMake(CGRectGetMinX(text13Rect), CGRectGetMinY(text13Rect) + (CGRectGetHeight(text13Rect) - text13TextHeight) / 2, CGRectGetWidth(text13Rect), text13TextHeight) withAttributes: text13FontAttributes];
-        CGContextRestoreGState(context);
+        //// Text 13 Drawing
+        CGRect text13Rect = CGRectMake(pausePositionPoint.x, pausePositionPoint.y, pauseButtonSize.width, pauseButtonSize.height);
+        {
+            NSString* textContent = @"PAUSE";
+            NSMutableParagraphStyle* text13Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+            text13Style.alignment = NSTextAlignmentLeft;
+            
+            NSDictionary* text13FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: pauseFontSize], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: text13Style};
+            
+            CGFloat text13TextHeight = [textContent boundingRectWithSize: CGSizeMake(text13Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text13FontAttributes context: nil].size.height;
+            CGContextSaveGState(context);
+            CGContextClipToRect(context, text13Rect);
+            [textContent drawInRect: CGRectMake(CGRectGetMinX(text13Rect), CGRectGetMinY(text13Rect) + (CGRectGetHeight(text13Rect) - text13TextHeight) / 2, CGRectGetWidth(text13Rect), text13TextHeight) withAttributes: text13FontAttributes];
+            CGContextRestoreGState(context);
+        }
     }
 }
 
