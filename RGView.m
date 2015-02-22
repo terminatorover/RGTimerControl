@@ -12,18 +12,21 @@
 
 -(void)drawRect:(CGRect)rect
 {
-    [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31];
+    [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:-138];
 }
 
-- (void)drawCanvas1WithAngle: (CGFloat)angle frameWidth: (CGFloat)frameWidth angle5: (CGFloat)angle5
+- (void)drawCanvas1WithAngle: (CGFloat)angle frameWidth: (CGFloat)frameWidth angle5: (CGFloat)angle5 progressAngle: (CGFloat)progressAngle
 {
     //// General Declarations
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     //// Color Declarations
-    UIColor* color = [UIColor colorWithRed: 0.341 green: 0.757 blue: 0.384 alpha: 1];
     UIColor* color2 = [UIColor colorWithRed: 0.275 green: 0.337 blue: 0.463 alpha: 1];
     UIColor* color3 = [UIColor colorWithRed: 0.227 green: 0.282 blue: 0.4 alpha: 1];
+    UIColor* color4 = [UIColor colorWithRed: 0.176 green: 0.584 blue: 0.851 alpha: 1];
+    UIColor* color5 = [UIColor colorWithRed: 0.204 green: 0.259 blue: 0.365 alpha: 1];
+    UIColor* color6 = [UIColor colorWithRed: 0.157 green: 0.502 blue: 0.718 alpha: 1];
+    UIColor* color8 = [UIColor colorWithRed: 0.376 green: 0.439 blue: 0.522 alpha: 1];
     
     //// Shadow Declarations
     UIColor* shadow = [UIColor.blackColor colorWithAlphaComponent: 0.47];
@@ -36,18 +39,30 @@
     CGPoint point2 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 30) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 30) * M_PI/180));
     CGSize itemSize = CGSizeMake(frameWidth / 10.0, frameWidth / 10.0);
     CGFloat fontSize = itemSize.width / 1.20;
+    CGPoint anchor1 = CGPointMake(point1.x, point1.y - itemSize.width);
     CGPoint point3 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 60) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 60) * M_PI/180));
     CGPoint point5 = CGPointMake(frameWidth * 0.45 + radius * cos((angle + 90) * M_PI/180), frameWidth * 0.45 + radius * sin((angle + 90) * M_PI/180));
+    CGPoint anchor2 = CGPointMake(point5.x + 1.05 * itemSize.width, itemSize.width / 3.0 + point5.y);
     CGSize innerCircle = CGSizeMake(frameWidth * 0.3, frameWidth * 0.3);
     CGPoint innerCirclePosition1 = CGPointMake(frameWidth * 0.35, frameWidth * 0.35);
     CGSize outerCircleSize1 = CGSizeMake(frameWidth * 0.75, frameWidth * 0.75);
-    CGPoint innerCirclePosition2 = CGPointMake(frameWidth * 0.12, frameWidth * 0.12);
+    CGPoint outerCirclePosition2 = CGPointMake(frameWidth * 0.12, frameWidth * 0.12);
+    CGSize outerCircleSize2 = CGSizeMake(frameWidth * 0.78, frameWidth * 0.78);
+    CGPoint outerCirclePosition = CGPointMake(frameWidth * 0.106, frameWidth * 0.106);
+    CGPoint outerCirclePosition3 = CGPointMake(frameWidth * 0.087, frameWidth * 0.09);
+    CGSize outerCircleSize3 = CGSizeMake(frameWidth * 0.82, frameWidth * 0.82);
+    CGPoint outerCirclePosition4 = CGPointMake(frameWidth * 0.077, frameWidth * 0.08);
+    CGSize outerCircleSize4 = CGSizeMake(frameWidth * 0.84, frameWidth * 0.84);
+    CGSize verticalAnchorSize = CGSizeMake(frameWidth / 33.0, frameWidth / 11.0);
+    CGSize horizontalAnchorSize = CGSizeMake(frameWidth / 11.0, frameWidth / 33.0);
     CGPoint point6 = CGPointMake(frameWidth * 0.45 + radius * cos(angle5 * M_PI/180), frameWidth * 0.45 + radius * sin(angle5 * M_PI/180));
     CGPoint point7 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 30) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 30) * M_PI/180));
     CGPoint point8 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 60) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 60) * M_PI/180));
+    CGPoint anchor3 = CGPointMake(point8.x + 0.1 * itemSize.width, point8.y + itemSize.width);
     CGPoint point9 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 90) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 90) * M_PI/180));
     CGPoint point10 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 120) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 120) * M_PI/180));
     CGPoint point11 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 150) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 150) * M_PI/180));
+    CGPoint anchor4 = CGPointMake(point11.x - 1.05 * itemSize.width, itemSize.width / 3.0 + point11.y);
     CGPoint point12 = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 180) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 180) * M_PI/180));
     CGPoint expression = CGPointMake(frameWidth * 0.45 + radius * cos((angle5 + 210) * M_PI/180), frameWidth * 0.45 + radius * sin((angle5 + 210) * M_PI/180));
     
@@ -61,8 +76,31 @@
     [rectanglePath fill];
     
     
+    //// Oval 5 Drawing
+    UIBezierPath* oval5Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(outerCirclePosition4.x, outerCirclePosition4.y, outerCircleSize4.width, outerCircleSize4.height)];
+    [color8 setFill];
+    [oval5Path fill];
+    
+    
+    //// Oval 4 Drawing
+    UIBezierPath* oval4Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake((outerCirclePosition3.x + 0.3), outerCirclePosition3.y, outerCircleSize3.width, outerCircleSize3.height)];
+    [color5 setFill];
+    [oval4Path fill];
+    
+    
+    //// Oval 3 Drawing
+    CGRect oval3Rect = CGRectMake(outerCirclePosition.x, outerCirclePosition.y, outerCircleSize2.width, outerCircleSize2.height);
+    UIBezierPath* oval3Path = UIBezierPath.bezierPath;
+    [oval3Path addArcWithCenter: CGPointMake(CGRectGetMidX(oval3Rect), CGRectGetMidY(oval3Rect)) radius: CGRectGetWidth(oval3Rect) / 2 startAngle: -90 * M_PI/180 endAngle: -progressAngle * M_PI/180 clockwise: YES];
+    [oval3Path addLineToPoint: CGPointMake(CGRectGetMidX(oval3Rect), CGRectGetMidY(oval3Rect))];
+    [oval3Path closePath];
+    
+    [color4 setFill];
+    [oval3Path fill];
+    
+    
     //// Oval 2 Drawing
-    UIBezierPath* oval2Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(innerCirclePosition2.x, innerCirclePosition2.y, outerCircleSize1.width, outerCircleSize1.height)];
+    UIBezierPath* oval2Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(outerCirclePosition2.x, outerCirclePosition2.y, outerCircleSize1.width, outerCircleSize1.height)];
     [color3 setFill];
     [oval2Path fill];
     
@@ -275,10 +313,34 @@
     UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(innerCirclePosition1.x, innerCirclePosition1.y, innerCircle.width, innerCircle.height)];
     CGContextSaveGState(context);
     CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, [shadow CGColor]);
-    [color setFill];
+    [color6 setFill];
     [ovalPath fill];
     CGContextRestoreGState(context);
+    
+    
+    
+    //// Rectangle 2 Drawing
+    UIBezierPath* rectangle2Path = [UIBezierPath bezierPathWithRect: CGRectMake(anchor1.x, anchor1.y, verticalAnchorSize.width, verticalAnchorSize.height)];
+    [UIColor.whiteColor setFill];
+    [rectangle2Path fill];
+    
+    
+    //// Rectangle 3 Drawing
+    UIBezierPath* rectangle3Path = [UIBezierPath bezierPathWithRect: CGRectMake(anchor3.x, anchor3.y, verticalAnchorSize.width, verticalAnchorSize.height)];
+    [UIColor.whiteColor setFill];
+    [rectangle3Path fill];
+    
+    
+    //// Rectangle 4 Drawing
+    UIBezierPath* rectangle4Path = [UIBezierPath bezierPathWithRect: CGRectMake(anchor4.x, anchor4.y, horizontalAnchorSize.width, horizontalAnchorSize.height)];
+    [UIColor.whiteColor setFill];
+    [rectangle4Path fill];
+    
+    
+    //// Rectangle 5 Drawing
+    UIBezierPath* rectangle5Path = [UIBezierPath bezierPathWithRect: CGRectMake(anchor2.x, anchor2.y, horizontalAnchorSize.width, horizontalAnchorSize.height)];
+    [UIColor.whiteColor setFill];
+    [rectangle5Path fill];
 }
-
 
 @end
