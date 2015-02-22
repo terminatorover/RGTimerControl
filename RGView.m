@@ -9,7 +9,31 @@
 #import "RGView.h"
 
 @implementation RGView
+{
+    CGRect _pauseCircleFrame;
+}
 
+
+- (void)awakeFromNib
+{
+    [self setupGestureRecognizer];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if(self)
+    {
+        [self setupGestureRecognizer];
+    }
+    return self;
+}
+
+- (void)setupGestureRecognizer
+{
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapGestureRecognition:)];
+    [self addGestureRecognizer:tapGestureRecognizer];
+}
 -(void)drawRect:(CGRect)rect
 {
     CGFloat drawingAngle = [self drawingAngleFromUserAngle:_inputAngle];
@@ -314,7 +338,8 @@
     
     
     //// Oval Drawing
-    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(innerCirclePosition1.x, innerCirclePosition1.y, innerCircle.width, innerCircle.height)];
+    _pauseCircleFrame = CGRectMake(innerCirclePosition1.x, innerCirclePosition1.y, innerCircle.width, innerCircle.height);
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect:_pauseCircleFrame];
     CGContextSaveGState(context);
     CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, [shadow CGColor]);
     [color6 setFill];
@@ -394,6 +419,18 @@
 - (void)setPauseNow:(BOOL)pauseNow
 {
     _pauseNow = pauseNow;
+    [self setNeedsDisplay];
+}
+
+
+#pragma mark - Handling Tap Recognition
+-(void)handleTapGestureRecognition:(UITapGestureRecognizer *)tapGestureRecognizer
+{
+    CGPoint tapPoint =  [tapGestureRecognizer locationInView:self];
+    if(CGRectContainsPoint(_pauseCircleFrame,tapPoint))
+    {
+        _pauseNow = !_pauseNow;
+    }
     [self setNeedsDisplay];
 }
 @end
