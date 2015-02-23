@@ -339,7 +339,7 @@
     
     //// Oval Drawing
     _pauseCircleFrame = CGRectMake(innerCirclePosition1.x, innerCirclePosition1.y, innerCircle.width, innerCircle.height);
-    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect:_pauseCircleFrame];
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect:_pauseCircleFrame ];
     CGContextSaveGState(context);
     CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, [shadow CGColor]);
     [color6 setFill];
@@ -372,7 +372,7 @@
     [rectangle5Path fill];
     
     
-    if (!hidden)
+    if (hidden)
     {
         //// Text 13 Drawing
         CGRect text13Rect = CGRectMake(pausePositionPoint.x, pausePositionPoint.y, pauseButtonSize.width, pauseButtonSize.height);
@@ -389,9 +389,26 @@
             [textContent drawInRect: CGRectMake(CGRectGetMinX(text13Rect), CGRectGetMinY(text13Rect) + (CGRectGetHeight(text13Rect) - text13TextHeight) / 2, CGRectGetWidth(text13Rect), text13TextHeight) withAttributes: text13FontAttributes];
             CGContextRestoreGState(context);
         }
+
+    }else
+    {
+        //// Text 14 Drawing
+        CGRect text14Rect = CGRectMake(pausePositionPoint.x, pausePositionPoint.y, pauseButtonSize.width, pauseButtonSize.height);
+        {
+            NSString* textContent = @"START";
+            NSMutableParagraphStyle* text14Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+            text14Style.alignment = NSTextAlignmentLeft;
+            
+            NSDictionary* text14FontAttributes = @{NSFontAttributeName: [UIFont systemFontOfSize: pauseFontSize], NSForegroundColorAttributeName: UIColor.whiteColor, NSParagraphStyleAttributeName: text14Style};
+            
+            CGFloat text14TextHeight = [textContent boundingRectWithSize: CGSizeMake(text14Rect.size.width, INFINITY)  options: NSStringDrawingUsesLineFragmentOrigin attributes: text14FontAttributes context: nil].size.height;
+            CGContextSaveGState(context);
+            CGContextClipToRect(context, text14Rect);
+            [textContent drawInRect: CGRectMake(CGRectGetMinX(text14Rect), CGRectGetMinY(text14Rect) + (CGRectGetHeight(text14Rect) - text14TextHeight) / 2, CGRectGetWidth(text14Rect), text14TextHeight) withAttributes: text14FontAttributes];
+            CGContextRestoreGState(context);
+        }
     }
 }
-
 
 - (CGFloat)drawingAngleFromUserAngle:(CGFloat)angle
 {
