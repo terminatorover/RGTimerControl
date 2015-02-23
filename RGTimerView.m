@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 ROBERA GELETA. All rights reserved.
 //
 
-
+#define TOTAL_TIME_IN_SEC 60
 
 #import "RGTimerView.h"
 
@@ -15,8 +15,13 @@
 @implementation RGTimerView
 {
     CGRect _pauseCircleFrame;
+    CGFloat _rawAngle;
     CGFloat _computedAngle;
+    NSTimer *_timer;
+    CGFloat _chosenAmountOfTime;
+    CGFloat _amountOfTimePassed;
 }
+
 
 
 - (void)awakeFromNib
@@ -45,7 +50,7 @@
 }
 -(void)drawRect:(CGRect)rect
 {
-
+    
     [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:_computedAngle hidden:_pauseNow];
 }
 
@@ -398,7 +403,7 @@
             [textContent drawInRect: CGRectMake(CGRectGetMinX(text13Rect), CGRectGetMinY(text13Rect) + (CGRectGetHeight(text13Rect) - text13TextHeight) / 2, CGRectGetWidth(text13Rect), text13TextHeight) withAttributes: text13FontAttributes];
             CGContextRestoreGState(context);
         }
-
+        
     }else
     {
         //// Text 14 Drawing
@@ -419,23 +424,7 @@
     }
 }
 
-- (CGFloat)drawingAngleFromUserAngle:(CGFloat)angle
-{
-    CGFloat drawingAngle ;
-    if(angle >= 180)
-    {
-        drawingAngle = -90 - abs((angle -180)); // angle - 360;
-    }else if (angle > 90)
-    {
-        drawingAngle =  -1 * (-90 + angle);
-    }
-    else
-    {
-        drawingAngle = 90 - angle;
-    }
-    NSLog(@"CALCULATED ANGLE:%f",drawingAngle);
-    return drawingAngle;
-}
+
 
 -(void)setInputAngle:(CGFloat)inputAngle
 {
@@ -463,6 +452,21 @@
             [_delegate pauseValue:_pauseNow];
         }
     }
+    if(_pauseNow)//if we are seeing the pause button the user want's their timer started
+    {
+        _chosenAmountOfTime  = TOTAL_TIME_IN_SEC * [self percentageFromAngle:_rawAngle];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                  target:self
+                                                selector:@selector(countUp:)
+                                                userInfo:nil
+                                                 repeats:YES];
+        
+    }else//pause the timer
+    {
+        
+    }
+    
+    
     [self setNeedsDisplay];
 }
 
@@ -470,15 +474,14 @@
 {
     CGPoint currentTouch = [panGestureRecognizer locationInView:self];
     //get the angle  from the touch  location
-    CGFloat angle =  RADIANS_TO_DEGREES(pToA(currentTouch, self));
-    _computedAngle = [self drawingAngleFromTouchAngle:angle];
-    NSLog(@"ANGLE:-> %f, COMPUTED_ANGLE:%f",angle,_computedAngle);
+    _rawAngle =  RADIANS_TO_DEGREES(pToA(currentTouch, self));
+    _computedAngle = [self drawingAngleFromTouchAngle:_rawAngle];
+    NSLog(@"ANGLE:-> %f, COMPUTED_ANGLE:%f",_rawAngle,_computedAngle);
     [self setNeedsDisplay];
-    
-    
-    
 }
 
+
+#pragma mark - Angle Computations
 - (CGFloat)drawingAngleFromTouchAngle:(CGFloat)angle
 {
     
@@ -497,7 +500,23 @@
     return 0.0;
 }
 
-
+- (CGFloat)drawingAngleFromUserAngle:(CGFloat)angle
+{
+    CGFloat drawingAngle ;
+    if(angle >= 180)
+    {
+        drawingAngle = -90 - abs((angle -180)); // angle - 360;
+    }else if (angle > 90)
+    {
+        drawingAngle =  -1 * (-90 + angle);
+    }
+    else
+    {
+        drawingAngle = 90 - angle;
+    }
+    NSLog(@"CALCULATED ANGLE:%f",drawingAngle);
+    return drawingAngle;
+}
 
 static CGFloat pToA (CGPoint loc, UIView* self) {
     
@@ -506,4 +525,38 @@ static CGFloat pToA (CGPoint loc, UIView* self) {
     
     return atan2(loc.y - c.y, loc.x - c.x);
 }
+
+- (CGFloat)percentageFromAngle:(CGFloat)angle
+{
+    CGFloat correctAngle;
+    if(angle <= 180)
+    {
+        correctAngle = angle + 90;
+    }else
+    {
+        correctAngle = angle + 450;
+    }
+    
+    return correctAngle/360.00;
+}
+
+
+
+#pragma mark - Handling Time Ticking
+- (void)countUp:(id)timer
+{
+    NSLog(@"TIMER");
+    _amountOfTimePassed += 1;
+    CGFloat angleMoved =  360 *_amountOfTimePassed / _chosenAmountOfTime;
+    _computedAngle  -= angleMoved;
+    [self setNeedsDisplay];
+    if(angleMoved == 360)
+    {
+        [_timer invalidate];
+        _timer = nil;
+        self.pauseNow = NO;
+    }
+    [self setNeedsDisplay];
+}
+
 @end
