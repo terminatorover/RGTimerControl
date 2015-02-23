@@ -6,11 +6,16 @@
 //  Copyright (c) 2015 ROBERA GELETA. All rights reserved.
 //
 
+
+
 #import "RGTimerView.h"
+
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 
 @implementation RGTimerView
 {
     CGRect _pauseCircleFrame;
+    CGFloat _computedAngle;
 }
 
 
@@ -33,11 +38,15 @@
 {
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapGestureRecognition:)];
     [self addGestureRecognizer:tapGestureRecognizer];
+    
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePanningGestureRecognition:)];
+    [self addGestureRecognizer:panGestureRecognizer];
+    
 }
 -(void)drawRect:(CGRect)rect
 {
-    CGFloat drawingAngle = [self drawingAngleFromUserAngle:_inputAngle];
-    [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:drawingAngle hidden:_pauseNow];
+
+    [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:_computedAngle hidden:_pauseNow];
 }
 
 - (void)drawCanvas1WithAngle: (CGFloat)angle frameWidth: (CGFloat)frameWidth angle5: (CGFloat)angle5 progressAngle: (CGFloat)progressAngle hidden: (BOOL)hidden
@@ -424,12 +433,14 @@
     {
         drawingAngle = 90 - angle;
     }
+    NSLog(@"CALCULATED ANGLE:%f",drawingAngle);
     return drawingAngle;
 }
 
 -(void)setInputAngle:(CGFloat)inputAngle
 {
     _inputAngle = inputAngle;
+    _computedAngle = [self drawingAngleFromUserAngle:_inputAngle];
     [self setNeedsDisplay];
 }
 
@@ -453,6 +464,46 @@
         }
     }
     [self setNeedsDisplay];
+}
 
+- (void)handlePanningGestureRecognition:(UIPanGestureRecognizer *)panGestureRecognizer
+{
+    CGPoint currentTouch = [panGestureRecognizer locationInView:self];
+    //get the angle  from the touch  location
+    CGFloat angle =  RADIANS_TO_DEGREES(pToA(currentTouch, self));
+    _computedAngle = [self drawingAngleFromTouchAngle:angle];
+    NSLog(@"ANGLE:-> %f, COMPUTED_ANGLE:%f",angle,_computedAngle);
+    [self setNeedsDisplay];
+    
+    
+    
+}
+
+- (CGFloat)drawingAngleFromTouchAngle:(CGFloat)angle
+{
+    
+    if(angle >= -90 && angle <= 0)
+    {
+        return  - 1 * angle ;
+    }
+    else if (angle > 0 && angle <= 180)
+    {
+        return - 1 * angle;
+    }else
+    {
+        return -1 * (360- abs(angle));
+    }
+    
+    return 0.0;
+}
+
+
+
+static CGFloat pToA (CGPoint loc, UIView* self) {
+    
+    CGPoint c = CGPointMake(CGRectGetMidX(self.bounds),
+                            CGRectGetMidY(self.bounds));
+    
+    return atan2(loc.y - c.y, loc.x - c.x);
 }
 @end
