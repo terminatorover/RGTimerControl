@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 ROBERA GELETA. All rights reserved.
 //
 
+
+
 #import <UIKit/UIKit.h>
 @protocol RGTimerViewDelegateProtcol <NSObject>
 - (void)pauseValue:(BOOL)value;
@@ -13,8 +15,12 @@
 
 
 @interface RGTimerView : UIView
+- (void)resetTimer;
 @property (nonatomic) CGFloat inputAngle;
 @property (nonatomic) BOOL pauseNow;
-@property id<RGTimerViewDelegateProtcol> delegate;
+@property (nonatomic) CGFloat increment;
+@property (nonatomic) CGFloat totalTimeInSec;
+
+@property IBOutlet id<RGTimerViewDelegateProtcol> delegate;
 @end
 

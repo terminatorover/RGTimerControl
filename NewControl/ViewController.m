@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "RGTimerView.h"
 
-@interface ViewController ()
+@interface ViewController ()<RGTimerViewDelegateProtcol>
 @property (weak, nonatomic) IBOutlet RGTimerView *timerView;
 
 @end
@@ -19,7 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
+    [self.timerView setTotalTimeInSec:60];
+    [self.timerView setIncrement:0.05];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,12 +28,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)slider:(UISlider *)sender
+-(void)pauseValue:(BOOL)value
 {
+    NSLog(@"VALUE: %d",value);
+}
 
-    CGFloat angleValue = 360.0 * sender.value;
-    NSLog(@"Value: %f",angleValue );
-    [self.timerView setInputAngle:angleValue];
+- (IBAction)resetTimer:(id)sender {
+    [self.timerView resetTimer];
 }
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 ROBERA GELETA. All rights reserved.
 //
 
-#define TOTAL_TIME_IN_SEC 60
+
 
 #import "RGTimerView.h"
 
@@ -50,7 +50,6 @@
 }
 -(void)drawRect:(CGRect)rect
 {
-    
     [self drawCanvas1WithAngle:-90 frameWidth:rect.size.width angle5:31 progressAngle:_computedAngle hidden:_pauseNow];
 }
 
@@ -440,7 +439,7 @@
 }
 
 
-#pragma mark - Handling Tap Recognition
+#pragma mark - Handling Gesture Recognition
 -(void)handleTapGestureRecognition:(UITapGestureRecognizer *)tapGestureRecognizer
 {
     CGPoint tapPoint =  [tapGestureRecognizer locationInView:self];
@@ -454,19 +453,18 @@
     }
     if(_pauseNow)//if we are seeing the pause button the user want's their timer started
     {
-        _chosenAmountOfTime  = TOTAL_TIME_IN_SEC * [self percentageFromAngle:_rawAngle];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1
+        _chosenAmountOfTime  = self.totalTimeInSec * [self percentageFromAngle:_rawAngle];
+
+        _timer = [NSTimer scheduledTimerWithTimeInterval:self.increment
                                                   target:self
                                                 selector:@selector(countUp:)
                                                 userInfo:nil
                                                  repeats:YES];
-        
     }else//pause the timer
     {
-        
+        [_timer invalidate];
+        _timer = nil;
     }
-    
-    
     [self setNeedsDisplay];
 }
 
@@ -476,7 +474,7 @@
     //get the angle  from the touch  location
     _rawAngle =  RADIANS_TO_DEGREES(pToA(currentTouch, self));
     _computedAngle = [self drawingAngleFromTouchAngle:_rawAngle];
-    NSLog(@"ANGLE:-> %f, COMPUTED_ANGLE:%f",_rawAngle,_computedAngle);
+//    NSLog(@"RAW ANGLE:-> %f",_rawAngle);
     [self setNeedsDisplay];
 }
 
@@ -514,7 +512,7 @@
     {
         drawingAngle = 90 - angle;
     }
-    NSLog(@"CALCULATED ANGLE:%f",drawingAngle);
+
     return drawingAngle;
 }
 
@@ -529,11 +527,12 @@ static CGFloat pToA (CGPoint loc, UIView* self) {
 - (CGFloat)percentageFromAngle:(CGFloat)angle
 {
     CGFloat correctAngle;
-    if(angle <= 180)
+    if(angle <= 180 && angle >= -90)
     {
         correctAngle = angle + 90;
     }else
     {
+
         correctAngle = angle + 450;
     }
     
@@ -541,22 +540,87 @@ static CGFloat pToA (CGPoint loc, UIView* self) {
 }
 
 
+- (CGFloat)newAngleByAddingAngle:(CGFloat)angle toRawAngle:(CGFloat)rawAngle
+{
+    CGFloat newAngle;
+    if(rawAngle <= 180 && rawAngle >= -90)
+    {
+        newAngle = rawAngle - angle;
+        NSLog(@"OLD ANGLE:%f NEW ANGLE:%f",rawAngle,newAngle);
+        if(newAngle < -90)
+        {
+            newAngle = -90;
+        }
+    }else if(rawAngle < -89.9 && rawAngle > -179.9)
+    {
+//        NSLog(@"SMALL, ANGLE %f",angle);
+        newAngle = rawAngle - (angle);
+        if(newAngle <= -179.99)
+        {
+            CGFloat difference = (newAngle + 179.99);
+            newAngle = 180 + difference;
+        }
+    }
+//    NSLog(@"NEW RAW ANGLE:%f",newAngle);
+    return newAngle;
+}
+
 
 #pragma mark - Handling Time Ticking
 - (void)countUp:(id)timer
 {
-    NSLog(@"TIMER");
+
     _amountOfTimePassed += 1;
-    CGFloat angleMoved =  360 *_amountOfTimePassed / _chosenAmountOfTime;
-    _computedAngle  -= angleMoved;
-    [self setNeedsDisplay];
-    if(angleMoved == 360)
+    
+    CGFloat angleMoved =  360 * self.increment / _chosenAmountOfTime;
+    _rawAngle = [self newAngleByAddingAngle:angleMoved toRawAngle:_rawAngle];
+
+    _computedAngle  = [self drawingAngleFromTouchAngle:_rawAngle];
+    if(_rawAngle == -90 )
     {
         [_timer invalidate];
         _timer = nil;
         self.pauseNow = NO;
+        if(_delegate && [_delegate respondsToSelector:@selector(pauseValue:)])
+        {
+            [_delegate pauseValue:_pauseNow];
+        }
     }
     [self setNeedsDisplay];
 }
+
+#pragma mark - Custom Loading Of Properites
+- (CGFloat)increment
+{
+    if(_increment == 0)
+    {
+        _increment = 1;
+    }
+    return _increment;
+}
+
+- (CGFloat)totalTimeInSec
+{
+    if(_totalTimeInSec == 0)
+    {
+        _totalTimeInSec = 3600;
+
+    }
+    return _totalTimeInSec;
+}
+
+
+- (void)resetTimer
+{
+    _amountOfTimePassed = 0;
+    [_timer invalidate];
+    _timer = nil;
+    _pauseNow = NO;
+    _computedAngle = [self drawingAngleFromTouchAngle:-90];
+    [self setNeedsDisplay];
+}
+
+
+
 
 @end
