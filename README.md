@@ -1,8 +1,9 @@
 # RGTimerControl
 ![g](https://github.com/terminatorover/RGTimerControl/blob/master/pic.png)
 
-This custom control is a count down timer. The design was taken from 
- [ Aleksandar Djuric's work on as see on Pinterest](https://www.pinterest.com/pin/554294666613031165/)
+This custom control is a count down timer.Note, "Reset Timer" piece is not part of the
+control and only shown for demo purpose. The design was taken from 
+[ Aleksandar Djuric's work on as see on Pinterest](https://www.pinterest.com/pin/554294666613031165/)
 
 You can either instantiate it in code via initWithFrame: or drop it in as a class in a nib or storyboard.
 Then the user can interact with the control. By by panning to select the amount of time they want to 
