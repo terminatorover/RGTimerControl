@@ -17,5 +17,6 @@ pauseNow property.
 
 ##Customizing
 There are two properties for customization. increment, and totalTimeInSec
+
    increment is the value of how much secs are added each time the timer fires. 
    note if this is not programtically specified the default value used is 1 sec.
