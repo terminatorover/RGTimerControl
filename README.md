@@ -20,3 +20,6 @@ There are two properties for customization. increment, and totalTimeInSec
 
    increment is the value of how much secs are added each time the timer fires. 
    note if this is not programtically specified the default value used is 1 sec.
+   
+   totalTimeInSec is the total number of seconds from which the timer starts to count down
+   note if this is not programtically specified the default value used is 3600 secs.
