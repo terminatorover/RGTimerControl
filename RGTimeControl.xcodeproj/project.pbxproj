@@ -13,19 +13,8 @@
 		A11E9D921A9A691600D493EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11E9D901A9A691600D493EC /* Main.storyboard */; };
 		A11E9D941A9A691600D493EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A11E9D931A9A691600D493EC /* Images.xcassets */; };
 		A11E9D971A9A691600D493EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E9D951A9A691600D493EC /* LaunchScreen.xib */; };
-		A11E9DA31A9A691600D493EC /* NewControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E9DA21A9A691600D493EC /* NewControlTests.m */; };
 		A11E9DAE1A9A692200D493EC /* RGTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E9DAD1A9A692200D493EC /* RGTimerView.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		A11E9D9D1A9A691600D493EC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A11E9D7B1A9A691600D493EC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A11E9D821A9A691600D493EC;
-			remoteInfo = NewControl;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A11E9D831A9A691600D493EC /* RGTimeControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGTimeControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,7 +27,6 @@
 		A11E9D911A9A691600D493EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A11E9D931A9A691600D493EC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A11E9D961A9A691600D493EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		A11E9D9C1A9A691600D493EC /* RGTimeControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RGTimeControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11E9DA11A9A691600D493EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11E9DA21A9A691600D493EC /* NewControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewControlTests.m; sourceTree = "<group>"; };
 		A11E9DAC1A9A692200D493EC /* RGTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTimerView.h; sourceTree = "<group>"; };
@@ -47,13 +35,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		A11E9D801A9A691600D493EC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A11E9D991A9A691600D493EC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -78,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				A11E9D831A9A691600D493EC /* RGTimeControl.app */,
-				A11E9D9C1A9A691600D493EC /* RGTimeControlTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,24 +124,6 @@
 			productReference = A11E9D831A9A691600D493EC /* RGTimeControl.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A11E9D9B1A9A691600D493EC /* RGTimeControlTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A11E9DA91A9A691600D493EC /* Build configuration list for PBXNativeTarget "RGTimeControlTests" */;
-			buildPhases = (
-				A11E9D981A9A691600D493EC /* Sources */,
-				A11E9D991A9A691600D493EC /* Frameworks */,
-				A11E9D9A1A9A691600D493EC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A11E9D9E1A9A691600D493EC /* PBXTargetDependency */,
-			);
-			name = RGTimeControlTests;
-			productName = NewControlTests;
-			productReference = A11E9D9C1A9A691600D493EC /* RGTimeControlTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -173,10 +135,6 @@
 				TargetAttributes = {
 					A11E9D821A9A691600D493EC = {
 						CreatedOnToolsVersion = 6.1.1;
-					};
-					A11E9D9B1A9A691600D493EC = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = A11E9D821A9A691600D493EC;
 					};
 				};
 			};
@@ -194,7 +152,6 @@
 			projectRoot = "";
 			targets = (
 				A11E9D821A9A691600D493EC /* RGTimeControl */,
-				A11E9D9B1A9A691600D493EC /* RGTimeControlTests */,
 			);
 		};
 /* End PBXProject section */
@@ -207,13 +164,6 @@
 				A11E9D921A9A691600D493EC /* Main.storyboard in Resources */,
 				A11E9D971A9A691600D493EC /* LaunchScreen.xib in Resources */,
 				A11E9D941A9A691600D493EC /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A11E9D9A1A9A691600D493EC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,23 +181,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A11E9D981A9A691600D493EC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A11E9DA31A9A691600D493EC /* NewControlTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		A11E9D9E1A9A691600D493EC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A11E9D821A9A691600D493EC /* RGTimeControl */;
-			targetProxy = A11E9D9D1A9A691600D493EC /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A11E9D901A9A691600D493EC /* Main.storyboard */ = {
@@ -365,40 +299,6 @@
 			};
 			name = Release;
 		};
-		A11E9DAA1A9A691600D493EC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = NewControlTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = RGTimeControlTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewControl.app/NewControl";
-			};
-			name = Debug;
-		};
-		A11E9DAB1A9A691600D493EC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = NewControlTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = RGTimeControlTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewControl.app/NewControl";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -416,15 +316,6 @@
 			buildConfigurations = (
 				A11E9DA71A9A691600D493EC /* Debug */,
 				A11E9DA81A9A691600D493EC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A11E9DA91A9A691600D493EC /* Build configuration list for PBXNativeTarget "RGTimeControlTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A11E9DAA1A9A691600D493EC /* Debug */,
-				A11E9DAB1A9A691600D493EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

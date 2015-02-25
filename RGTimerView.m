@@ -610,6 +610,9 @@ static CGFloat pToA (CGPoint loc, UIView* self) {
 }
 
 
+
+
+
 - (void)resetTimer
 {
     _amountOfTimePassed = 0;
