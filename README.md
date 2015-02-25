@@ -14,7 +14,7 @@ To be notified of the users interaction the implement RGTimerViewDelegateProtcol
 and is now able to tap PAUSE to pause the timer. Conversly when the value is NO it means that the user 
 has hit pause. 
 
-you can reset the timer via the resetTimer method, and pause the timer programtically by setting the
+- you can reset the timer via the resetTimer method, and pause the timer programtically by setting the
 pauseNow property. 
 
 ##Customizing
